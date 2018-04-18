@@ -1,0 +1,140 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>ORE-Spot</groupId>
+	<artifactId>ORE-Spot</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>ORE-Spot</name>
+
+	<dependencies>
+
+
+		<!-- ClausIE & Stanford Open IE dependencies -->
+		<dependency>
+			<groupId>edu.stanford.nlp</groupId>
+			<artifactId>stanford-corenlp</artifactId>
+			<version>3.7.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>edu.stanford.nlp</groupId>
+			<artifactId>stanford-parser</artifactId>
+			<version>3.7.0</version>
+			<classifier>models</classifier>
+		</dependency>
+
+		<dependency>
+			<groupId>edu.stanford.nlp</groupId>
+			<artifactId>stanford-corenlp</artifactId>
+			<version>3.7.0</version>
+			<classifier>models-english</classifier>
+		</dependency>
+
+		<!-- Reverb -->
+
+		<!-- https://mvnrepository.com/artifact/edu.washington.cs.knowitall/reverb-core -->
+		<dependency>
+			<groupId>edu.washington.cs.knowitall</groupId>
+			<artifactId>reverb-core</artifactId>
+			<version>1.4.3</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/edu.washington.cs.knowitall/reverb-models -->
+		<dependency>
+			<groupId>edu.washington.cs.knowitall</groupId>
+			<artifactId>reverb-models</artifactId>
+			<version>1.4.0</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/edu.washington.cs.knowitall.ollie/ollie-core -->
+		<dependency>
+			<groupId>edu.washington.cs.knowitall.ollie</groupId>
+<artifactId>ollie-core_2.9.2</artifactId>
+<version>[1.0.0, )</version>
+		</dependency>
+
+		<dependency>
+			<groupId>edu.washington.cs.knowitall.nlptools</groupId>
+			<artifactId>nlptools-parse-malt_2.9.2</artifactId>
+			<version>2.4.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>edu.washington.cs.knowitall.nlptools</groupId>
+			<artifactId>nlptools-stem-morpha_2.9.2</artifactId>
+			<version>2.4.0</version>
+		</dependency>
+		<dependency>
+			<groupId>edu.washington.cs.knowitall.nlptools</groupId>
+			<artifactId>nlptools-conf-breeze_2.9.2</artifactId>
+			<version>2.4.0</version>
+		</dependency>
+	</dependencies>
+
+
+
+
+	<build>
+		<sourceDirectory>src</sourceDirectory>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.3</version>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<version>2.6</version>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<descriptorRefs>
+						<descriptorRef>jar-with-dependencies</descriptorRef>
+					</descriptorRefs>
+					<archive>
+						<manifest>
+							<addClasspath>true</addClasspath>
+							<classpathPrefix>lib/</classpathPrefix>
+							<!-- <mainClass>test.test.App</mainClass> -->
+							<mainClass>com.main.OIE</mainClass>
+						</manifest>
+					</archive>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>3.0.2</version>
+				<configuration>
+					<archive>
+						<manifest>
+							<addClasspath>true</addClasspath>
+							<classpathPrefix>lib/</classpathPrefix>
+							<!-- <mainClass>test.test.App</mainClass> -->
+							<mainClass>com.main.OIE</mainClass>
+						</manifest>
+					</archive>
+				</configuration>
+			</plugin>
+		</plugins>
+
+		<resources>
+			<resource>
+				<directory>config</directory>
+				<includes>
+					<include>*.properties</include>
+				</includes>
+			</resource>
+		</resources>
+	</build>
+
+</project>
