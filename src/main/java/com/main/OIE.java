@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
@@ -68,12 +69,19 @@ public class OIE {
 				List<String> list = new ArrayList<String>();
 				
 				int counter = 0;
+				long initialTime = System.currentTimeMillis();
 				for(String s : l) {
 					List<Triple> t = new ArrayList<Triple> (o.tripleExtractor(s));
 					String oOutput = u.createOutput(s, t);
 					list.add(oOutput);
 					counter += t.size();
 				}
+				long endTime = System.currentTimeMillis() - initialTime;
+				String timeElapsed = String.format("TOTAL TIME = %d min, %d sec", TimeUnit.MILLISECONDS.toMinutes(endTime),
+						TimeUnit.MILLISECONDS.toSeconds(endTime)
+								- TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(endTime)));
+				logger.info("Ollie - "+timeElapsed);
+				list.add(timeElapsed);
 				u.writeDocumentTriples(new File(outputFolder+"ollie/" + f.getName() + ".tsv"), list);
 				r.setOllieTriples(counter);
 				lr.add(r);
@@ -99,6 +107,7 @@ public class OIE {
 				List<String> list = new ArrayList<String>();
 				
 				int counter = 0;
+				long initialTime = System.currentTimeMillis();
 				for(String s : l) {
 					List<Triple> t = new ArrayList<Triple>(soie.extractTSL(s));
 					String stanfordOutput = u.createOutput(s, t);
@@ -106,6 +115,12 @@ public class OIE {
 					
 					counter += t.size();
 				}
+				long endTime = System.currentTimeMillis() - initialTime;
+				String timeElapsed = String.format("TOTAL TIME = %d min, %d sec", TimeUnit.MILLISECONDS.toMinutes(endTime),
+						TimeUnit.MILLISECONDS.toSeconds(endTime)
+								- TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(endTime)));
+				logger.info("Stanford - "+timeElapsed);
+				list.add(timeElapsed);
 
 				u.writeDocumentTriples(new File(outputFolder+"stanford/" + f.getName() + ".tsv"), list);
 				r.setOllieTriples(counter);
@@ -132,6 +147,7 @@ public class OIE {
 				List<String> list = new ArrayList<String>();
 				
 				int counter = 0;
+				long initialTime = System.currentTimeMillis();
 				for(String s : l) {
 					List<Triple> t = new ArrayList<Triple> (reverb.reverb(s));
 					String reverbOutput = u.createOutput(s, t);
@@ -140,10 +156,18 @@ public class OIE {
 					counter += t.size();
 				}
 				
+				long endTime = System.currentTimeMillis() - initialTime;
+				String timeElapsed = String.format("TOTAL TIME = %d min, %d sec", TimeUnit.MILLISECONDS.toMinutes(endTime),
+						TimeUnit.MILLISECONDS.toSeconds(endTime)
+								- TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(endTime)));
+				logger.info("Reverb - "+timeElapsed);
+				list.add(timeElapsed);
+				
 				u.writeDocumentTriples(new File(outputFolder+"reverb/" + f.getName() + ".tsv"), list);
 				r.setReverbTriples(counter);
 				lr.add(r);
 			}
+			
 			
 		}
 		u.writeReport(new File(outputFolder+"report/Reverb-Report.tsv"),lr);
@@ -166,6 +190,7 @@ public class OIE {
 				List<String> list = new ArrayList<String>();
 				
 				int counter = 0;
+				long initialTime = System.currentTimeMillis();
 				for(String s : l) {
 					List<Triple> t = new ArrayList<Triple>(cl.extractClausIETriples(s, problematicSnts));
 					String clOutput = u.createOutput(s, t);
@@ -173,6 +198,13 @@ public class OIE {
 					
 					counter += t.size();
 				}
+				
+				long endTime = System.currentTimeMillis() - initialTime;
+				String timeElapsed = String.format("TOTAL TIME = %d min, %d sec", TimeUnit.MILLISECONDS.toMinutes(endTime),
+						TimeUnit.MILLISECONDS.toSeconds(endTime)
+								- TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(endTime)));
+				logger.info("ClausIE - "+timeElapsed);
+				list.add(timeElapsed);
 				
 				u.writeDocumentTriples(new File(outputFolder+"clausie/" + f.getName() + ".tsv"), list);
 				r.setClausieTriples(counter);
