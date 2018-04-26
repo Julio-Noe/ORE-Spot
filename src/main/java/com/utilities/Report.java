@@ -2,10 +2,7 @@ package com.utilities;
 
 public class Report {
 	private String file;
-	private int stanfordTriples;
-	private int clausieTriples;
-	private int reverbTriples;
-	private int ollieTriples;
+	private int numTriples;
 	private int numSentences;
 	
 	public Report() {
@@ -13,7 +10,7 @@ public class Report {
 	}
 	
 	public String printReport() {
-		return file +"\t" + numSentences + "\t" + stanfordTriples + "\t" + clausieTriples + "\t" + reverbTriples + "\t" + ollieTriples;
+		return file +"\t" + numSentences + "\t" + numTriples;
 	}
 
 
@@ -27,43 +24,13 @@ public class Report {
 	}
 
 
-	public int getStanfordTriples() {
-		return stanfordTriples;
+	public int getNumTriples() {
+		return numTriples;
 	}
 
 
-	public void setStanfordTriples(int stanfordTriples) {
-		this.stanfordTriples = stanfordTriples;
-	}
-
-
-	public int getClausieTriples() {
-		return clausieTriples;
-	}
-
-
-	public void setClausieTriples(int clausieTriples) {
-		this.clausieTriples = clausieTriples;
-	}
-
-
-	public int getReverbTriples() {
-		return reverbTriples;
-	}
-
-
-	public void setReverbTriples(int reverbTriples) {
-		this.reverbTriples = reverbTriples;
-	}
-
-
-	public int getOllieTriples() {
-		return ollieTriples;
-	}
-
-
-	public void setOllieTriples(int ollieTriples) {
-		this.ollieTriples = ollieTriples;
+	public void setNumTriples(int numTriples) {
+		this.numTriples = numTriples;
 	}
 
 

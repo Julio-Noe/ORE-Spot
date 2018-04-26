@@ -58,7 +58,7 @@ public class StanfordOIEImpl {
 			String toWrite = u.createOutput(sentence.toString(),listTriples);
 			outputLines.add(toWrite);
 		}
-		r.setStanfordTriples(counterTriples);
+		r.setNumTriples(counterTriples);
 		u.writeDocumentTriples(output, outputLines);
 	}
 	

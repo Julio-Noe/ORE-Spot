@@ -83,7 +83,7 @@ public class OIE {
 				logger.info("Ollie - "+timeElapsed);
 				list.add(timeElapsed);
 				u.writeDocumentTriples(new File(outputFolder+"ollie/" + f.getName() + ".tsv"), list);
-				r.setOllieTriples(counter);
+				r.setNumTriples(counter);
 				lr.add(r);
 			}
 			
@@ -123,7 +123,7 @@ public class OIE {
 				list.add(timeElapsed);
 
 				u.writeDocumentTriples(new File(outputFolder+"stanford/" + f.getName() + ".tsv"), list);
-				r.setOllieTriples(counter);
+				r.setNumTriples(counter);
 				lr.add(r);
 			}
 			
@@ -164,7 +164,7 @@ public class OIE {
 				list.add(timeElapsed);
 				
 				u.writeDocumentTriples(new File(outputFolder+"reverb/" + f.getName() + ".tsv"), list);
-				r.setReverbTriples(counter);
+				r.setNumTriples(counter);
 				lr.add(r);
 			}
 			
@@ -207,7 +207,7 @@ public class OIE {
 				list.add(timeElapsed);
 				
 				u.writeDocumentTriples(new File(outputFolder+"clausie/" + f.getName() + ".tsv"), list);
-				r.setClausieTriples(counter);
+				r.setNumTriples(counter);
 				lr.add(r);
 			}
 			
