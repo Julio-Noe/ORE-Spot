@@ -77,6 +77,8 @@ public class OIENEL {
 				List<String> list = new ArrayList<String>();
 
 				int counter = 0;
+				int numNe = 0;
+				int num2Ne = 0;
 				long initialTime = System.currentTimeMillis();
 				for (String s : l) {
 					List<NE> nes = nel.extractEntitiesSpotlight(s, "0.7");
@@ -95,6 +97,8 @@ public class OIENEL {
 				list.add(timeElapsed);
 				u.writeDocumentTriples(new File(outputFolder + "ollie/" + f.getName() + ".tsv"), list);
 				r.setNumTriples(counter);
+				r.setNum2Ne(num2Ne);
+				r.setNumNe(numNe);
 				lr.add(r);
 			}
 
@@ -125,6 +129,8 @@ public class OIENEL {
 				List<String> list = new ArrayList<String>();
 
 				int counter = 0;
+				int numNe = 0;
+				int num2Ne = 0;
 				long initialTime = System.currentTimeMillis();
 				for (String s : l) {
 					List<NE> nes = nel.extractEntitiesSpotlight(s, "0.7");
@@ -146,6 +152,8 @@ public class OIENEL {
 
 				u.writeDocumentTriples(new File(outputFolder + "stanford/" + f.getName() + ".tsv"), list);
 				r.setNumTriples(counter);
+				r.setNum2Ne(num2Ne);
+				r.setNumNe(numNe);
 				lr.add(r);
 			}
 
@@ -176,6 +184,8 @@ public class OIENEL {
 				List<String> list = new ArrayList<String>();
 
 				int counter = 0;
+				int numNe = 0;
+				int num2Ne = 0;
 				long initialTime = System.currentTimeMillis();
 				for (String s : l) {
 					List<NE> nes = nel.extractEntitiesSpotlight(s, "0.7");
@@ -195,7 +205,10 @@ public class OIENEL {
 
 				u.writeDocumentTriples(new File(outputFolder + "reverb/" + f.getName() + ".tsv"), list);
 				r.setNumTriples(counter);
+				r.setNum2Ne(num2Ne);
+				r.setNumNe(numNe);
 				lr.add(r);
+			
 			}
 
 		}
@@ -226,14 +239,14 @@ public class OIENEL {
 				List<String> list = new ArrayList<String>();
 
 				int counter = 0;
-				int neCounter = 0;
-				int ne2Counter = 0;
+				int numNe = 0;
+				int num2Ne = 0;
 				long initialTime = System.currentTimeMillis();
 				for (String s : l) {
 					List<NE> nes = nel.extractEntitiesSpotlight(s, "0.7");
-					neCounter += nes.size();
+					numNe += nes.size();
 					if(nes.size() > 0){
-						ne2Counter += nes.size();
+						num2Ne += nes.size();
 						List<Triple> t = new ArrayList<Triple>(cl.extractClausIETriples(s, problematicSnts));
 						String clOutput = u.createOutput(s, t);
 						list.add(clOutput);
@@ -251,6 +264,8 @@ public class OIENEL {
 				
 				u.writeDocumentTriples(new File(outputFolder + "clausie/" + f.getName() + ".tsv"), list);
 				r.setNumTriples(counter);
+				r.setNum2Ne(num2Ne);
+				r.setNumNe(numNe);
 				lr.add(r);
 			}
 

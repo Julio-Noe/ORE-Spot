@@ -13,7 +13,7 @@ public class NelReport {
 	}
 
 	public String printReport() {
-		return file + "\t" + numSentences + "\t" + numTriples;
+		return file + "\t" + numSentences + "\t" + numTriples + "\t" + num2Ne + "\t" + numNe;
 	}
 
 	public String getFile() {

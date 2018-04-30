@@ -57,9 +57,18 @@ public class Utils {
 	
 	public void writeNelReport(File output, List<NelReport> rs, String timeElapsed) {
 		try(PrintWriter pw = new PrintWriter(new OutputStreamWriter(new FileOutputStream(output)))){
+			int numNe = 0;
+			int numSentences = 0;
+			int num2Ne = 0;
+			int numTriples = 0;
 			for(NelReport r : rs) {
+				numNe += r.getNumNe();
+				numSentences += r.getNumSentences();
+				num2Ne += r.getNum2Ne();
+				numTriples += r.getNumTriples();
 				pw.write(r.printReport() + "\n");
 			}
+			pw.write( "\t" + numSentences +  "\t" + numTriples +  "\t" + num2Ne +  "\t" + numNe + "\n");
 			pw.write(timeElapsed);
 			pw.close();
 		}catch(IOException e) {
