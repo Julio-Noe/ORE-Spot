@@ -58,6 +58,7 @@ public class OIE {
 		List<Report> lr = new ArrayList<Report>();
 		OllieImpl o = new OllieImpl();
 		
+		long initialGlobalTime = System.currentTimeMillis();
 		for(File f : listFiles) {
 			if(f.getName().endsWith(".txt")) {
 				Report r = new Report();
@@ -88,7 +89,13 @@ public class OIE {
 			}
 			
 		}
-		u.writeReport(new File(outputFolder+"report/Ollie-Report.tsv"),lr);
+		
+		long endTime = System.currentTimeMillis() - initialGlobalTime;
+		String timeElapsed = String.format("TOTAL TIME = %d min, %d sec", TimeUnit.MILLISECONDS.toMinutes(endTime),
+				TimeUnit.MILLISECONDS.toSeconds(endTime)
+						- TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(endTime)));
+		logger.info("ClausIE - "+timeElapsed);
+		u.writeReport(new File(outputFolder+"report/Ollie-Report.tsv"),lr, timeElapsed);
 	}
 	
 	public void runStanford(File[] listFiles, String outputFolder) throws IOException {
@@ -96,6 +103,7 @@ public class OIE {
 		List<Report> lr = new ArrayList<Report>();
 		StanfordOIEImpl soie = new StanfordOIEImpl();
 		
+		long initialGlobalTime = System.currentTimeMillis();
 		for(File f : listFiles) {
 			if(f.getName().endsWith(".txt")) {
 				Report r = new Report();
@@ -128,7 +136,12 @@ public class OIE {
 			}
 			
 		}
-		u.writeReport(new File(outputFolder+"report/Stanford-Report.tsv"),lr);
+		long endTime = System.currentTimeMillis() - initialGlobalTime;
+		String timeElapsed = String.format("TOTAL TIME = %d min, %d sec", TimeUnit.MILLISECONDS.toMinutes(endTime),
+				TimeUnit.MILLISECONDS.toSeconds(endTime)
+						- TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(endTime)));
+		logger.info("ClausIE - "+timeElapsed);
+		u.writeReport(new File(outputFolder+"report/Stanford-Report.tsv"),lr, timeElapsed);
 	}
 	
 	public void runReverb(File[] listFiles, String outputFolder) throws IOException {
@@ -136,6 +149,7 @@ public class OIE {
 		List<Report> lr = new ArrayList<Report>();
 		ReverbImpl reverb = new ReverbImpl();
 		
+		long initialGlobalTime = System.currentTimeMillis();
 		for(File f : listFiles) {
 			if(f.getName().endsWith(".txt")) {
 				Report r = new Report();
@@ -170,7 +184,12 @@ public class OIE {
 			
 			
 		}
-		u.writeReport(new File(outputFolder+"report/Reverb-Report.tsv"),lr);
+		long endTime = System.currentTimeMillis() - initialGlobalTime;
+		String timeElapsed = String.format("TOTAL TIME = %d min, %d sec", TimeUnit.MILLISECONDS.toMinutes(endTime),
+				TimeUnit.MILLISECONDS.toSeconds(endTime)
+						- TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(endTime)));
+		logger.info("ClausIE - "+timeElapsed);
+		u.writeReport(new File(outputFolder+"report/Reverb-Report.tsv"),lr, timeElapsed);
 	}
 	
 	public void runClausie(File[] listFiles, String outputFolder) throws IOException {
@@ -179,6 +198,7 @@ public class OIE {
 		ClausIEImpl cl = new ClausIEImpl();
 		List<String> problematicSnts = new ArrayList<String>();
 		
+		long initialGlobalTime = System.currentTimeMillis();
 		for(File f : listFiles) {
 			if(f.getName().endsWith(".txt")) {
 				Report r = new Report();
@@ -212,7 +232,12 @@ public class OIE {
 			}
 			
 		}
-		u.writeReport(new File(outputFolder+"report/Clausie-Report.tsv"),lr);
+		long endTime = System.currentTimeMillis() - initialGlobalTime;
+		String timeElapsed = String.format("TOTAL TIME = %d min, %d sec", TimeUnit.MILLISECONDS.toMinutes(endTime),
+				TimeUnit.MILLISECONDS.toSeconds(endTime)
+						- TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(endTime)));
+		logger.info("ClausIE - "+timeElapsed);
+		u.writeReport(new File(outputFolder+"report/Clausie-Report.tsv"),lr, timeElapsed);
 	}
 	
 

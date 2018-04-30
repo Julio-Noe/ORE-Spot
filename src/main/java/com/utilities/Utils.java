@@ -43,11 +43,24 @@ public class Utils {
 	}
 	
 	
-	public void writeReport(File output, List<Report> rs) {
+	public void writeReport(File output, List<Report> rs, String timeElapsed) {
 		try(PrintWriter pw = new PrintWriter(new OutputStreamWriter(new FileOutputStream(output)))){
 			for(Report r : rs) {
 				pw.write(r.printReport() + "\n");
 			}
+			pw.write(timeElapsed);
+			pw.close();
+		}catch(IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void writeNelReport(File output, List<NelReport> rs, String timeElapsed) {
+		try(PrintWriter pw = new PrintWriter(new OutputStreamWriter(new FileOutputStream(output)))){
+			for(NelReport r : rs) {
+				pw.write(r.printReport() + "\n");
+			}
+			pw.write(timeElapsed);
 			pw.close();
 		}catch(IOException e) {
 			e.printStackTrace();
