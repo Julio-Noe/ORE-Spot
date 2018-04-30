@@ -271,15 +271,10 @@
 
 		<resources>
 			<resource>
-				<directory>config</directory>
-				<includes>
-					<include>*.properties</include>
-				</includes>
-			</resource>
-			<resource>
 				<directory>src/main/resources</directory>
 				<includes>
 					<include>engmailt.linear-1.7.mco</include>
+					<include>*.properties</include>
 				</includes>
 			</resource>
 		</resources>
