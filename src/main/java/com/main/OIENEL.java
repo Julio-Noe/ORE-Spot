@@ -67,6 +67,7 @@ public class OIENEL {
 		NEL nel = new NEL();
 		long initialGlobalTime = System.currentTimeMillis();
 		for (File f : listFiles) {
+			
 			if (f.getName().endsWith(".txt")) {
 				NelReport r = new NelReport();
 				r.setFile(f.getName());
@@ -82,7 +83,9 @@ public class OIENEL {
 				long initialTime = System.currentTimeMillis();
 				for (String s : l) {
 					List<NE> nes = nel.extractEntitiesSpotlight(s, "0.7");
+					numNe += nes.size();
 					if(nes.size() > 0){
+						num2Ne += nes.size();
 						List<Triple> t = new ArrayList<Triple>(o.tripleExtractor(s));
 						String oOutput = u.createOutput(s, t);
 						list.add(oOutput);
@@ -134,7 +137,9 @@ public class OIENEL {
 				long initialTime = System.currentTimeMillis();
 				for (String s : l) {
 					List<NE> nes = nel.extractEntitiesSpotlight(s, "0.7");
+					numNe += nes.size();
 					if(nes.size() > 0){
+						num2Ne += nes.size();
 						List<Triple> t = new ArrayList<Triple>(soie.extractTSL(s));
 						String stanfordOutput = u.createOutput(s, t);
 						list.add(stanfordOutput);
@@ -189,7 +194,9 @@ public class OIENEL {
 				long initialTime = System.currentTimeMillis();
 				for (String s : l) {
 					List<NE> nes = nel.extractEntitiesSpotlight(s, "0.7");
+					numNe += nes.size();
 					if(nes.size() > 0){
+						num2Ne += nes.size();
 						List<Triple> t = new ArrayList<Triple>(reverb.reverb(s));
 						String reverbOutput = u.createOutput(s, t);
 						list.add(reverbOutput);
