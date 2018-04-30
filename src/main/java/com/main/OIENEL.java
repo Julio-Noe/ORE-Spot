@@ -83,18 +83,21 @@ public class OIENEL {
 				long initialTime = System.currentTimeMillis();
 				for (String s : l) {
 					List<NE> nes = nel.extractEntitiesSpotlight(s, "0.7");
-					numNe += nes.size();
-					if(nes.size() > 1){
-						num2Ne += nes.size();
-						List<Triple> t = new ArrayList<Triple>(o.tripleExtractor(s));
-						String oOutput = u.createOutput(s, t);
-						String nOutput = u.createNelOutput(s, nes);
-						list.add(oOutput);
-						list.add("=========");
-						list.add(nOutput);
-						list.add("=========");
-						counter += t.size();
+					if(nes != null) {
+						numNe += nes.size();
+						if(nes.size() > 1){
+							num2Ne += nes.size();
+							List<Triple> t = new ArrayList<Triple>(o.tripleExtractor(s));
+							String oOutput = u.createOutput(s, t);
+							String nOutput = u.createNelOutput(s, nes);
+							list.add(oOutput);
+							list.add("=========");
+							list.add(nOutput);
+							list.add("=========");
+							counter += t.size();
+						}
 					}
+					
 				}
 				long endTime = System.currentTimeMillis() - initialTime;
 				String timeElapsed = String.format("TOTAL TIME = %d min, %d sec",
@@ -141,18 +144,21 @@ public class OIENEL {
 				long initialTime = System.currentTimeMillis();
 				for (String s : l) {
 					List<NE> nes = nel.extractEntitiesSpotlight(s, "0.7");
-					numNe += nes.size();
-					if(nes.size() > 1){
-						num2Ne += nes.size();
-						List<Triple> t = new ArrayList<Triple>(soie.extractTSL(s));
-						String stanfordOutput = u.createOutput(s, t);
-						String nOutput = u.createNelOutput(s, nes);
-						list.add(stanfordOutput);
-						list.add("=========");
-						list.add(nOutput);
-						list.add("=========");
-						counter += t.size();
+					if(nes !=null) {
+						numNe += nes.size();
+						if(nes.size() > 1){
+							num2Ne += nes.size();
+							List<Triple> t = new ArrayList<Triple>(soie.extractTSL(s));
+							String stanfordOutput = u.createOutput(s, t);
+							String nOutput = u.createNelOutput(s, nes);
+							list.add(stanfordOutput);
+							list.add("=========");
+							list.add(nOutput);
+							list.add("=========");
+							counter += t.size();
+						}
 					}
+					
 					
 				}
 				long endTime = System.currentTimeMillis() - initialTime;
@@ -201,18 +207,21 @@ public class OIENEL {
 				long initialTime = System.currentTimeMillis();
 				for (String s : l) {
 					List<NE> nes = nel.extractEntitiesSpotlight(s, "0.7");
-					numNe += nes.size();
-					if(nes.size() > 1){
-						num2Ne += nes.size();
-						List<Triple> t = new ArrayList<Triple>(reverb.reverb(s));
-						String reverbOutput = u.createOutput(s, t);
-						String nOutput = u.createNelOutput(s, nes);
-						list.add(reverbOutput);
-						list.add("=========");
-						list.add(nOutput);
-						list.add("=========");
-						counter += t.size();
+					if(nes != null){
+						numNe += nes.size();
+						if(nes.size() > 1){
+							num2Ne += nes.size();
+							List<Triple> t = new ArrayList<Triple>(reverb.reverb(s));
+							String reverbOutput = u.createOutput(s, t);
+							String nOutput = u.createNelOutput(s, nes);
+							list.add(reverbOutput);
+							list.add("=========");
+							list.add(nOutput);
+							list.add("=========");
+							counter += t.size();
+						}
 					}
+					
 				}
 				long endTime = System.currentTimeMillis() - initialTime;
 				String timeElapsed = String.format("TOTAL TIME = %d min, %d sec",
@@ -262,18 +271,21 @@ public class OIENEL {
 				long initialTime = System.currentTimeMillis();
 				for (String s : l) {
 					List<NE> nes = nel.extractEntitiesSpotlight(s, "0.7");
-					numNe += nes.size();
-					if(nes.size() > 1){
-						num2Ne += nes.size();
-						List<Triple> t = new ArrayList<Triple>(cl.extractClausIETriples(s, problematicSnts));
-						String clOutput = u.createOutput(s, t);
-						String nOutput = u.createNelOutput(s, nes);
-						list.add(clOutput);
-						list.add("=========");
-						list.add(nOutput);
-						list.add("=========");
-						counter += t.size();
+					if(nes != null) {
+						numNe += nes.size();
+						if(nes.size() > 1){
+							num2Ne += nes.size();
+							List<Triple> t = new ArrayList<Triple>(cl.extractClausIETriples(s, problematicSnts));
+							String clOutput = u.createOutput(s, t);
+							String nOutput = u.createNelOutput(s, nes);
+							list.add(clOutput);
+							list.add("=========");
+							list.add(nOutput);
+							list.add("=========");
+							counter += t.size();
+						}
 					}
+					
 				}
 				
 				long endTime = System.currentTimeMillis() - initialTime;

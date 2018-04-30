@@ -70,7 +70,13 @@ public class NEL {
 	        InputStreamReader input = new InputStreamReader(respons.getEntity().getContent());
 	        
 	        JsonReader jrdr = Json.createReader(input);
-	        JsonObject obj = jrdr.readObject();
+	        JsonObject obj = null;
+	        try{
+	        		obj = jrdr.readObject();
+	        }catch(Exception e) {
+	        		logger.error("Exception in sentence = " + paragraph);
+	        		return null;
+	        }
 	        int entityCounter = 0;
 	        List<String> listEntities = new ArrayList<String>();
 	        JsonArray entities = obj.getJsonArray("Resources");
