@@ -45,8 +45,7 @@ public class Utils {
 		String output = sentence + "\t";
 		
 		for(int i = 0; i < nes.size() ; i++) {
-			int next = i +1;
-			System.out.println(nes.get(i).getEnd() +"----"+ nes.get(next).getBegin());
+			int next = i + 1;
 			if(nes.get(i).getEnd() < nes.get(next).getBegin())
 				output += nes.get(i).getMention() + "," +sentence.substring(nes.get(i).getEnd(),nes.get(++i).getBegin()) + "," +nes.get(i).getMention() + "\n\t";
 		}
