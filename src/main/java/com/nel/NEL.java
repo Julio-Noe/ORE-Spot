@@ -2,6 +2,8 @@ package com.nel;
 
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.json.Json;
@@ -27,7 +29,7 @@ public class NEL {
 	
 	public static void main(String[] args) throws Exception {
 		NEL n = new NEL();
-		String sentence = "Terrorist attacks by E.T.A. have declined in recent years and the number of its hardcore militants is thought to have fallen from the hundreds of 15 years ago to several score.";
+		String sentence = "Barack Obama was the president of the United States";
 		System.out.println(sentence);
 		List<NE> nes = n.extractEntitiesSpotlight(sentence, "0.7");
 		logger.info(sentence);
@@ -38,7 +40,7 @@ public class NEL {
 		
 		if(nes.size() > 1) {
 			for(int i = 0; i < nes.size() ;i++){
-				System.out.println(sentence.substring(nes.get(i).getEnd(), nes.get(++i).getBegin()));
+				System.out.println(nes.get(i).getMention() + "," + sentence.substring(nes.get(i).getEnd(), nes.get(++i).getBegin()) + "," + nes.get(i).getMention());
 			}
 		}
 
@@ -101,6 +103,11 @@ public class NEL {
 	            	listEntDesc.add(entDesc);
 	            }
 	        }
+	        Collections.sort(listEntDesc, new Comparator<NE>() {
+	        		public int compare(NE n1, NE n2) {
+	        			return ((Integer) n1.getBegin()).compareTo(n2.getBegin());
+	        		}
+	        });
 	        return listEntDesc;
 	    }
 	
