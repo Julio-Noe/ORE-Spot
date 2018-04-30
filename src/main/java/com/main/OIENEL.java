@@ -90,7 +90,9 @@ public class OIENEL {
 						String oOutput = u.createOutput(s, t);
 						String nOutput = u.createNelOutput(s, nes);
 						list.add(oOutput);
+						list.add("=========");
 						list.add(nOutput);
+						list.add("=========");
 						counter += t.size();
 					}
 				}
@@ -146,7 +148,9 @@ public class OIENEL {
 						String stanfordOutput = u.createOutput(s, t);
 						String nOutput = u.createNelOutput(s, nes);
 						list.add(stanfordOutput);
+						list.add("=========");
 						list.add(nOutput);
+						list.add("=========");
 						counter += t.size();
 					}
 					
@@ -204,7 +208,9 @@ public class OIENEL {
 						String reverbOutput = u.createOutput(s, t);
 						String nOutput = u.createNelOutput(s, nes);
 						list.add(reverbOutput);
+						list.add("=========");
 						list.add(nOutput);
+						list.add("=========");
 						counter += t.size();
 					}
 				}
@@ -263,7 +269,9 @@ public class OIENEL {
 						String clOutput = u.createOutput(s, t);
 						String nOutput = u.createNelOutput(s, nes);
 						list.add(clOutput);
+						list.add("=========");
 						list.add(nOutput);
+						list.add("=========");
 						counter += t.size();
 					}
 				}
