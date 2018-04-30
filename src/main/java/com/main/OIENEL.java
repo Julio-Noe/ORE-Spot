@@ -84,11 +84,13 @@ public class OIENEL {
 				for (String s : l) {
 					List<NE> nes = nel.extractEntitiesSpotlight(s, "0.7");
 					numNe += nes.size();
-					if(nes.size() > 0){
+					if(nes.size() > 1){
 						num2Ne += nes.size();
 						List<Triple> t = new ArrayList<Triple>(o.tripleExtractor(s));
 						String oOutput = u.createOutput(s, t);
+						String nOutput = u.createNelOutput(s, nes);
 						list.add(oOutput);
+						list.add(nOutput);
 						counter += t.size();
 					}
 				}
@@ -138,12 +140,13 @@ public class OIENEL {
 				for (String s : l) {
 					List<NE> nes = nel.extractEntitiesSpotlight(s, "0.7");
 					numNe += nes.size();
-					if(nes.size() > 0){
+					if(nes.size() > 1){
 						num2Ne += nes.size();
 						List<Triple> t = new ArrayList<Triple>(soie.extractTSL(s));
 						String stanfordOutput = u.createOutput(s, t);
+						String nOutput = u.createNelOutput(s, nes);
 						list.add(stanfordOutput);
-
+						list.add(nOutput);
 						counter += t.size();
 					}
 					
@@ -195,11 +198,13 @@ public class OIENEL {
 				for (String s : l) {
 					List<NE> nes = nel.extractEntitiesSpotlight(s, "0.7");
 					numNe += nes.size();
-					if(nes.size() > 0){
+					if(nes.size() > 1){
 						num2Ne += nes.size();
 						List<Triple> t = new ArrayList<Triple>(reverb.reverb(s));
 						String reverbOutput = u.createOutput(s, t);
+						String nOutput = u.createNelOutput(s, nes);
 						list.add(reverbOutput);
+						list.add(nOutput);
 						counter += t.size();
 					}
 				}
@@ -252,12 +257,13 @@ public class OIENEL {
 				for (String s : l) {
 					List<NE> nes = nel.extractEntitiesSpotlight(s, "0.7");
 					numNe += nes.size();
-					if(nes.size() > 0){
+					if(nes.size() > 1){
 						num2Ne += nes.size();
 						List<Triple> t = new ArrayList<Triple>(cl.extractClausIETriples(s, problematicSnts));
 						String clOutput = u.createOutput(s, t);
+						String nOutput = u.createNelOutput(s, nes);
 						list.add(clOutput);
-	
+						list.add(nOutput);
 						counter += t.size();
 					}
 				}

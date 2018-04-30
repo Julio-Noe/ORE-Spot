@@ -6,15 +6,14 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Properties;
 
 import org.apache.commons.io.FileUtils;
 
-import edu.stanford.nlp.ie.util.RelationTriple;
+import com.nel.NE;
+
 import edu.stanford.nlp.ling.CoreAnnotations.SentencesAnnotation;
-import edu.stanford.nlp.naturalli.NaturalLogicAnnotations;
 import edu.stanford.nlp.pipeline.Annotation;
 import edu.stanford.nlp.pipeline.StanfordCoreNLP;
 import edu.stanford.nlp.util.CoreMap;
@@ -38,6 +37,15 @@ public class Utils {
 		
 		for(Triple t : triples) {
 			output += t.toString() + "\n\t";
+		}
+		return output;
+	}
+	
+	public String createNelOutput(String sentence, List<NE> nes) {
+		String output = sentence + "\t";
+		
+		for(int i = 0; i < nes.size() ; i++) {
+			output += nes.get(i).getMention() + "," +sentence.substring(nes.get(i).getEnd(),nes.get(++i).getBegin()) + "," +nes.get(i).getMention() + "\n\t";
 		}
 		return output;
 	}
