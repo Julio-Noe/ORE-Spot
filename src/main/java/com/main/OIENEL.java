@@ -88,12 +88,10 @@ public class OIENEL {
 						if(nes.size() > 1){
 							num2Ne += nes.size();
 							List<Triple> t = new ArrayList<Triple>(o.tripleExtractor(s));
-							String oOutput = u.createOutput(s, t);
+//							String oOutput = u.createOutput(s, t);
 							String nOutput = u.createNelOutput(s, nes);
-							list.add(oOutput);
-							list.add("=========");
+//							list.add(oOutput);
 							list.add(nOutput);
-							list.add("=========");
 							counter += t.size();
 						}
 					}
