@@ -15,7 +15,7 @@ import edu.knowitall.ollie.OllieExtractionInstance;
 import edu.knowitall.tool.parse.MaltParser;
 import edu.knowitall.tool.parse.graph.DependencyGraph;
 
-public class OllieImpl {
+public class OllieImpl implements OIETools{
 	
 	// the extractor itself
     private Ollie ollie;
@@ -66,7 +66,7 @@ public class OllieImpl {
         }
     }
 	
-	public List<Triple> tripleExtractor(String sentence) {
+	public List<Triple> extractTriples(String sentence) {
 
         // extract from a single sentence.
 //        String sentence = "President Obama will meet with Congressional leaders on Friday, and House Republicans summoned lawmakers back for a Sunday session, in a last-ditch effort to avert a fiscal crisis brought on by automatic tax increases and spending cuts scheduled to hit next week.";

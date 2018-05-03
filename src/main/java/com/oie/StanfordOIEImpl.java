@@ -18,7 +18,7 @@ import edu.stanford.nlp.pipeline.Annotation;
 import edu.stanford.nlp.pipeline.StanfordCoreNLP;
 import edu.stanford.nlp.util.CoreMap;
 
-public class StanfordOIEImpl {
+public class StanfordOIEImpl implements OIETools{
 	
 	private Properties props;
 	private StanfordCoreNLP pipeline;
@@ -62,7 +62,7 @@ public class StanfordOIEImpl {
 		u.writeDocumentTriples(output, outputLines);
 	}
 	
-	public List<Triple> extractTSL(String s) throws IOException{
+	public List<Triple> extractTriples(String s) {
 		Utils u = new Utils();
 		Annotation document = new Annotation(s);
 		pipeline.annotate(document);

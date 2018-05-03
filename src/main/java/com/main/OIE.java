@@ -72,7 +72,7 @@ public class OIE {
 				int counter = 0;
 				long initialTime = System.currentTimeMillis();
 				for(String s : l) {
-					List<Triple> t = new ArrayList<Triple> (o.tripleExtractor(s));
+					List<Triple> t = new ArrayList<Triple> (o.extractTriples(s));
 					String oOutput = u.createOutput(s, t);
 					list.add(oOutput);
 					counter += t.size();
@@ -117,7 +117,7 @@ public class OIE {
 				int counter = 0;
 				long initialTime = System.currentTimeMillis();
 				for(String s : l) {
-					List<Triple> t = new ArrayList<Triple>(soie.extractTSL(s));
+					List<Triple> t = new ArrayList<Triple>(soie.extractTriples(s));
 					String stanfordOutput = u.createOutput(s, t);
 					list.add(stanfordOutput);
 					
@@ -163,7 +163,7 @@ public class OIE {
 				int counter = 0;
 				long initialTime = System.currentTimeMillis();
 				for(String s : l) {
-					List<Triple> t = new ArrayList<Triple> (reverb.reverb(s));
+					List<Triple> t = new ArrayList<Triple> (reverb.extractTriples(s));
 					String reverbOutput = u.createOutput(s, t);
 					list.add(reverbOutput);
 					
@@ -196,7 +196,7 @@ public class OIE {
 		Utils u = new Utils();
 		List<Report> lr = new ArrayList<Report>();
 		ClausIEImpl cl = new ClausIEImpl();
-		List<String> problematicSnts = new ArrayList<String>();
+//		List<String> problematicSnts = new ArrayList<String>();
 		
 		long initialGlobalTime = System.currentTimeMillis();
 		for(File f : listFiles) {
@@ -212,7 +212,7 @@ public class OIE {
 				int counter = 0;
 				long initialTime = System.currentTimeMillis();
 				for(String s : l) {
-					List<Triple> t = new ArrayList<Triple>(cl.extractClausIETriples(s, problematicSnts));
+					List<Triple> t = new ArrayList<Triple>(cl.extractTriples(s));
 					String clOutput = u.createOutput(s, t);
 					list.add(clOutput);
 					

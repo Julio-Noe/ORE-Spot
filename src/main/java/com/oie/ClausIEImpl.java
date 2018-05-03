@@ -1,16 +1,14 @@
 package com.oie;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.utilities.Triple;
-import com.utilities.Utils;
 
 import de.mpii.clausie.ClausIE;
 import de.mpii.clausie.Proposition;
 
-public class ClausIEImpl {
+public class ClausIEImpl implements OIETools{
 	
 	
 	private ClausIE clausIE;
@@ -19,8 +17,8 @@ public class ClausIEImpl {
 		clausIE.initParser();
 	}
 	
-	public List<Triple> extractClausIETriples(String sentence, List<String> problematicSnts){
-		List<String> outputLines = new ArrayList<String>();
+	public List<Triple> extractTriples(String sentence){
+//		List<String> outputLines = new ArrayList<String>();
 		List<Triple> listTriples = new ArrayList<Triple>();
 		try {
 			//logger.info("Sentence analyzed by ClausIE: " + sentence.getSentence());
@@ -28,18 +26,18 @@ public class ClausIEImpl {
 			clausIE.detectClauses();
 			clausIE.generatePropositions();
 		} catch (StackOverflowError s) {
-			problematicSnts.add(sentence + "********StackOverflowError");
+//			problematicSnts.add(sentence + "********StackOverflowError");
 			System.out.println("StackOverflowError");
 			//logger.error("StackOverflowError.... in sentence: " + sentence);
 			return listTriples;
 		} catch (NullPointerException e) {
-			problematicSnts.add(sentence + "********NullPointerException");
+//			problematicSnts.add(sentence + "********NullPointerException");
 			System.out.println("NullPointerException");
 			//logger.error("sentence :" + sentence + "--- give no clause");
 			return listTriples;
 		} catch(Exception e) {
 			
-			problematicSnts.add(sentence + "********Exception");
+//			problematicSnts.add(sentence + "********Exception");
 			System.out.println("Exception");
 			//logger.error("sentence :" + sentence + "--- give no clause");
 			return listTriples;

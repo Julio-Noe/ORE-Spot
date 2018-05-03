@@ -1,6 +1,5 @@
 package com.oie;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,13 +14,19 @@ import edu.washington.cs.knowitall.nlp.ChunkedSentence;
 import edu.washington.cs.knowitall.nlp.OpenNlpSentenceChunker;
 import edu.washington.cs.knowitall.nlp.extraction.ChunkedBinaryExtraction;
 
-public class ReverbImpl {
+public class ReverbImpl implements OIETools{
 	
-	public List<Triple> reverb(String sentStr) throws ConfidenceFunctionException, IOException {
+	public List<Triple> extractTriples(String sentStr) {
 //		String sentStr = "Michael McGinn is the mayor of Seattle.";
 		List<Triple> revTriples = new ArrayList<Triple>();
         // Looks on the classpath for the default model files.
-        OpenNlpSentenceChunker chunker = new OpenNlpSentenceChunker();
+        OpenNlpSentenceChunker chunker = null;
+		try {
+			chunker = new OpenNlpSentenceChunker();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         ChunkedSentence sent = chunker.chunkSentence(sentStr);
 
         // Prints out the (token, tag, chunk-tag) for the sentence
@@ -35,7 +40,16 @@ public class ReverbImpl {
 
         // Prints out extractions from the sentence.
         ReVerbExtractor reverb = new ReVerbExtractor();
-        ConfidenceFunction confFunc = new ReVerbOpenNlpConfFunction();
+        ConfidenceFunction confFunc = null;
+		try {
+			confFunc = new ReVerbOpenNlpConfFunction();
+		} catch (ConfidenceFunctionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         List<Triple> lt = new ArrayList<Triple>();
         for (ChunkedBinaryExtraction extr : reverb.extract(sent)) {
         		Triple t = new Triple();

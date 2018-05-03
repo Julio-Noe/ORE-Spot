@@ -1,10 +1,13 @@
 package com.utilities;
 
+import com.main.VerbAnalizer;
+
 public class Triple {
 	
 	private String extractor;
 	private String subject;
 	private String verb;
+	private String mainVerb;
 	private String predicate;
 	
 	private double confidence;
@@ -55,7 +58,10 @@ public class Triple {
 		return verb;
 	}
 	public void setVerb(String verb) {
+		VerbAnalizer v = new VerbAnalizer();
 		this.verb = verb;
+		this.setMainVerb(v.verbProcessing(this.verb));
+		
 	}
 	public String getPredicate() {
 		return predicate;
@@ -78,6 +84,14 @@ public class Triple {
 
 	public void setExtractor(String extractor) {
 		this.extractor = extractor;
+	}
+
+	public String getMainVerb() {
+		return mainVerb;
+	}
+
+	public void setMainVerb(String mainVerb) {
+		this.mainVerb = mainVerb;
 	}
 
 }
