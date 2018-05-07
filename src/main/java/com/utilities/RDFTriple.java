@@ -5,10 +5,10 @@ public class RDFTriple {
 	private String subject;
 	private String predicate;
 	private String object;
-	
+	private Triple ore;
 	@Override
 	public String toString() {
-		return "("+subject  + "," + predicate + "," + object +")";
+		return "("+subject  + "\t" + predicate +"\t" + object +")";
 		
 	}
 	
@@ -29,6 +29,14 @@ public class RDFTriple {
 	}
 	public void setObject(String object) {
 		this.object = object;
+	}
+
+	public Triple getOre() {
+		return ore;
+	}
+
+	public void setOre(Triple ore) {
+		this.ore = ore;
 	}
 	
 	

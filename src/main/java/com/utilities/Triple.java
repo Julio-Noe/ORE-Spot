@@ -18,7 +18,7 @@ public class Triple {
 	
 	@Override
     public String toString() {
-        return "\""+subject+" , "+verb+" , "+predicate + "\"";
+        return "\""+subject+"\t"+verb+"\t"+predicate + "\"";
     }
 
 	@Override

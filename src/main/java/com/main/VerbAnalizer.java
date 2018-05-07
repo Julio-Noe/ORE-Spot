@@ -62,7 +62,8 @@ public class VerbAnalizer {
 			System.out.println(dependencies.getRoots());
 			for(IndexedWord iw : dependencies.getRoots()) {
 				System.out.println(iw.lemma() + "--" + iw.tag());
-				mainVerb = iw.lemma() + "---" + iw.tag();
+//				mainVerb = iw.lemma() + "---" + iw.tag();
+				mainVerb = iw.lemma();
 			}
 		}
 		return mainVerb;

@@ -1,9 +1,5 @@
 package com.utilities;
 
-import java.util.List;
-
-import com.nel.NE;
-
 public class NelReport {
 
 	private String file;
@@ -18,7 +14,7 @@ public class NelReport {
 	}
 
 	public String printReport() {
-		return file + "\t" + numSentences + "\t" + numTriples + "\t" + num2Ne + "\t" + numNe;
+		return file + "\t" + numSentences + "\t" + numTriples + "\t" + num2Ne + "\t" + numNe + "\t" + numRDFTriples;
 	}
 
 	public String getFile() {

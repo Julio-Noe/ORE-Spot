@@ -43,24 +43,10 @@ public class Utils {
 	}
 	
 	public String createOutput(String docName, String sentence, Sentence snt) {
-		String output = docName + "\t" + sentence + "\t";
+		String output = docName + "\t" + sentence + "\n";
 		
-		for(int i = 0; i < snt.getTriples().size() ; i++) {
-			output += snt.getTriples().get(i).toString();
-			if(i < snt.getRdf().size()) {
-				output += "\t" + snt.getRdf().get(i).toString() + "\n \t \t";
-			}else
-				output += "\n \t \t";
-		}
-		
-		if(snt.getRdf().size() > 0) {
-			for(RDFTriple t : snt.getRdf()) {
-				output += t.toString() + "\n\t";
-			}
-		}else {
-			for(Triple t: snt.getTriples()) {
-				output += t.toString() + "\n\t";
-			}
+		for(RDFTriple r : snt.getRdf()) {
+			output +="\t \t"+ r.getOre().toString() + "\t" +r.toString() + "\n";
 		}
 		
 		return output;
@@ -92,6 +78,7 @@ public class Utils {
 					trip.setSubject(s.getMention());
 					trip.setPredicate(v);
 					trip.setObject(o.getMention());
+					trip.setOre(t);
 					rdf.add(trip);
 				}
 			}
@@ -130,14 +117,17 @@ public class Utils {
 			int numSentences = 0;
 			int num2Ne = 0;
 			int numTriples = 0;
+			int numRDFTriples = 0;
+			pw.write("file \t numSentences \t numTriples \t num2Ne \t numNE \t numRDFTriples \n");
 			for(NelReport r : rs) {
 				numNe += r.getNumNe();
 				numSentences += r.getNumSentences();
 				num2Ne += r.getNum2Ne();
 				numTriples += r.getNumTriples();
+				numRDFTriples += r.getNumRDFTriples();
 				pw.write(r.printReport() + "\n");
 			}
-			pw.write( "\t" + numSentences +  "\t" + numTriples +  "\t" + num2Ne +  "\t" + numNe + "\n");
+			pw.write( "\t" + numSentences +  "\t" + numTriples +  "\t" + num2Ne +  "\t" + numNe + "\t"+ + numRDFTriples + "\n");
 			pw.write(timeElapsed);
 			pw.close();
 		}catch(IOException e) {
