@@ -74,6 +74,7 @@ public class OIE {
 		long initialGlobalTime = System.currentTimeMillis();
 		Utils u = new Utils();
 		List<NelReport> lr = new ArrayList<NelReport>();
+		List<String> globalOutput = new ArrayList<String>();
 		for(File f : listFiles) {
 			if(f.getName().endsWith(".txt")) {
 				NelReport r = new NelReport();
@@ -122,7 +123,7 @@ public class OIE {
 				logger.info(oieToolName + " - "+timeElapsed);
 				list.add(timeElapsed);
 				u.writeDocumentTriples(new File(outputFolder+"/"+oieToolName + f.getName() + ".tsv"), list);
-				
+				globalOutput.addAll(list);
 				lr.add(r);
 			}
 		}
@@ -131,6 +132,7 @@ public class OIE {
 				TimeUnit.MILLISECONDS.toSeconds(endTime)
 						- TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(endTime)));
 		logger.info("ClausIE - "+timeElapsed);
+		u.writeDocumentTriples(new File(outputFolder+"/Global-"+oieToolName + ".tsv"), globalOutput);
 		u.writeNelReport(new File(outputFolder+"report/" + oieToolName + "-Report.tsv"),lr, timeElapsed);
 		
 	}
