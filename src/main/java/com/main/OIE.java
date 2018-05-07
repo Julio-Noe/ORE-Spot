@@ -103,7 +103,7 @@ public class OIE {
 						snt.setRdf(u.extractRDFTriples(snt.getTriples(), snt.getNes()));
 					}
 					
-					String oOutput = u.createOutput(f.getName(), snt.getTriples());
+					String oOutput = u.createOutput(f.getName(),s, snt);
 					list.add(oOutput);
 					numTrip += snt.getTriples().size();
 					numNes += snt.getNes().size();
@@ -122,7 +122,7 @@ public class OIE {
 								- TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(endTime)));
 				logger.info(oieToolName + " - "+timeElapsed);
 				list.add(timeElapsed);
-				u.writeDocumentTriples(new File(outputFolder+"/"+oieToolName + f.getName() + ".tsv"), list);
+				u.writeDocumentTriples(new File(outputFolder+"/"+oieToolName+ "/" + f.getName() + ".tsv"), list);
 				globalOutput.addAll(list);
 				lr.add(r);
 			}
