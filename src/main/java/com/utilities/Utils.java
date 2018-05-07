@@ -11,17 +11,10 @@ import java.util.Properties;
 
 import org.apache.commons.io.FileUtils;
 
+import com.main.VerbAnalizer;
 import com.nel.NE;
 
-import edu.stanford.nlp.ling.CoreAnnotations.LemmaAnnotation;
-import edu.stanford.nlp.ling.CoreAnnotations.PartOfSpeechAnnotation;
 import edu.stanford.nlp.ling.CoreAnnotations.SentencesAnnotation;
-import edu.stanford.nlp.ling.CoreAnnotations.TextAnnotation;
-import edu.stanford.nlp.semgraph.SemanticGraph;
-import edu.stanford.nlp.semgraph.SemanticGraphCoreAnnotations.BasicDependenciesAnnotation;
-import edu.stanford.nlp.ling.CoreAnnotations.TokensAnnotation;
-import edu.stanford.nlp.ling.CoreLabel;
-import edu.stanford.nlp.ling.IndexedWord;
 import edu.stanford.nlp.pipeline.Annotation;
 import edu.stanford.nlp.pipeline.StanfordCoreNLP;
 import edu.stanford.nlp.util.CoreMap;
@@ -49,6 +42,30 @@ public class Utils {
 		return output;
 	}
 	
+	public String createOutput(String docName, String sentence, Sentence snt) {
+		String output = docName + "\t" + sentence + "\t";
+		
+		for(int i = 0; i < snt.getTriples().size() ; i++) {
+			output += snt.getTriples().get(i).toString();
+			if(i < snt.getRdf().size()) {
+				output += "\t" + snt.getRdf().get(i).toString() + "\n \t \t";
+			}else
+				output += "\n \t \t";
+		}
+		
+		if(snt.getRdf().size() > 0) {
+			for(RDFTriple t : snt.getRdf()) {
+				output += t.toString() + "\n\t";
+			}
+		}else {
+			for(Triple t: snt.getTriples()) {
+				output += t.toString() + "\n\t";
+			}
+		}
+		
+		return output;
+	}
+	
 	public String createNelOutput(String sentence, List<NE> nes) {
 		String output = sentence + "\t";
 		
@@ -58,6 +75,40 @@ public class Utils {
 				output += nes.get(i).getMention() + "," +sentence.substring(nes.get(i).getEnd(),nes.get(++i).getBegin()) + "," +nes.get(i).getMention() + "\n\t";
 		}
 		return output;
+	}
+	
+	public List<RDFTriple> extractRDFTriples(List<Triple> triples, List<NE> nes) {
+		VerbAnalizer va = new VerbAnalizer();
+		List<RDFTriple> rdf = new ArrayList<RDFTriple>();
+		for(Triple t : triples) {
+			NE o = null;
+			RDFTriple trip = new RDFTriple();
+			String v = "";
+			NE s = lookForMention(t.getSubject(), nes);
+			if(s != null) {
+				o = lookForMention(t.getPredicate(),nes);
+				if(o != null) {
+					v = va.verbProcessing(t.getVerb());
+					trip.setSubject(s.getMention());
+					trip.setPredicate(v);
+					trip.setObject(o.getMention());
+					rdf.add(trip);
+				}
+			}
+		}
+		return rdf;
+		
+	}
+	
+	public NE lookForMention(String part, List<NE> nes) {
+		NE ne = null;
+		for(NE n : nes) {
+			if(part.contains(n.getMention())) {
+				ne = n;
+				break;
+			}
+		}
+		return ne;
 	}
 	
 	

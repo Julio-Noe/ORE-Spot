@@ -1,5 +1,9 @@
 package com.utilities;
 
+import java.util.List;
+
+import com.nel.NE;
+
 public class NelReport {
 
 	private String file;
@@ -7,6 +11,7 @@ public class NelReport {
 	private int numNe;
 	private int num2Ne;
 	private int numSentences;
+	private int numRDFTriples;
 
 	public NelReport() {
 		// TODO Auto-generated constructor stub
@@ -54,6 +59,14 @@ public class NelReport {
 
 	public void setNum2Ne(int num2Ne) {
 		this.num2Ne = num2Ne;
+	}
+
+	public int getNumRDFTriples() {
+		return numRDFTriples;
+	}
+
+	public void setNumRDFTriples(int numRDFTriples) {
+		this.numRDFTriples = numRDFTriples;
 	}
 
 }
