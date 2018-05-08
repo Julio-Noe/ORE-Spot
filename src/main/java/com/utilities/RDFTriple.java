@@ -8,7 +8,7 @@ public class RDFTriple {
 	private Triple ore;
 	@Override
 	public String toString() {
-		return "("+subject  + "\t" + predicate +"\t" + object +")";
+		return subject  + "\t" + predicate +"\t" + object;
 		
 	}
 	
@@ -37,6 +37,15 @@ public class RDFTriple {
 
 	public void setOre(Triple ore) {
 		this.ore = ore;
+	}
+	
+	public boolean repeated(RDFTriple r2) {
+		if(this.subject.equals(r2.subject))
+			if(this.predicate.equals(r2.predicate))
+				if(this.object.equals(r2.object))
+					return true;
+		return false;
+
 	}
 	
 	

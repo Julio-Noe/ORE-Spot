@@ -1,9 +1,10 @@
 package com.main;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.io.FileUtils;
@@ -16,9 +17,8 @@ import com.oie.OllieImpl;
 import com.oie.ReverbImpl;
 import com.oie.StanfordOIEImpl;
 import com.utilities.NelReport;
-import com.utilities.Report;
+import com.utilities.RDFTriple;
 import com.utilities.Sentence;
-import com.utilities.Triple;
 import com.utilities.Utils;
 
 public class OIE {
@@ -99,9 +99,11 @@ public class OIE {
 					
 					snt.setTriples(o.extractTriples(s));
 					snt.setNes(nel.extractEntitiesSpotlight(s, "0.7"));
+					List<RDFTriple> rdfTriples = new ArrayList<RDFTriple>();
 					if(snt.getNes().size() > 1) {
 						num2Ne += snt.getNes().size();
-						snt.setRdf(u.extractRDFTriples(snt.getTriples(), snt.getNes()));
+						rdfTriples.addAll(u.extractRDFTriples(snt.getTriples(), snt.getNes()));
+						snt.setRdf(removeRepeated(rdfTriples));
 					}
 					
 					String oOutput = u.createOutput(f.getName(),s, snt);
@@ -140,6 +142,21 @@ public class OIE {
 		u.writeDocumentTriples(new File(outputFolder+"/OnlyORE-"+oieToolName + ".tsv"), globalRDFTriples);
 		u.writeNelReport(new File(outputFolder+"report/" + oieToolName + "-Report.tsv"),lr, timeElapsed);
 		
+	}
+	
+	public List<RDFTriple> removeRepeated(List<RDFTriple> rdf) {
+		Set<RDFTriple> repeated = new HashSet<RDFTriple>();
+		for(int i = 0 ; i < rdf.size() ; i++) {
+			for(int j = i+1 ; j < rdf.size() ; i ++) {
+				if(rdf.get(i).repeated(rdf.get(j))){
+					repeated.add(rdf.get(j));
+				}
+			}
+		}
+		for(RDFTriple r : repeated) {
+			rdf.remove(r);
+		}
+		return rdf;
 	}
 	
 //	public void runOllie(File[] listFiles, String outputFolder) throws IOException {
