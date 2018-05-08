@@ -52,6 +52,16 @@ public class Utils {
 		return output;
 	}
 	
+	public String createOutputOre(Sentence snt) {
+		String output = "";
+		
+		for(RDFTriple r : snt.getRdf()) {
+			output += r.toString() + "\n";
+		}
+		
+		return output;
+	}
+	
 	public String createNelOutput(String sentence, List<NE> nes) {
 		String output = sentence + "\t";
 		

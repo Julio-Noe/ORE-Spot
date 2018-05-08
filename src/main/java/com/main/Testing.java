@@ -6,9 +6,9 @@ public class Testing {
 
 	public static void main(String[] args) {
 		NormalizedLevenshtein l = new NormalizedLevenshtein();
-		String name = "volkswagen";
-        System.out.println(l.distance(name, "volkswagen"));
-        System.out.println(l.distance(name, "vw"));
+		String name = "U.S. Securities and Exchange Commission".toLowerCase();
+        System.out.println(l.distance(name, "the Securities and Exchange Commission".toLowerCase()));
+        System.out.println(l.distance(name, "Securities and Exchange Commission".toLowerCase()));
         System.out.println(l.distance(name, "vws"));
         
         info.debatty.java.stringsimilarity.MetricLCS lcs = 

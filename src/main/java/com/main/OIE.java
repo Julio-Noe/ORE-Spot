@@ -75,6 +75,7 @@ public class OIE {
 		Utils u = new Utils();
 		List<NelReport> lr = new ArrayList<NelReport>();
 		List<String> globalOutput = new ArrayList<String>();
+		List<String> globalRDFTriples = new ArrayList<String>();
 		for(File f : listFiles) {
 			if(f.getName().endsWith(".txt")) {
 				NelReport r = new NelReport();
@@ -105,6 +106,9 @@ public class OIE {
 					
 					String oOutput = u.createOutput(f.getName(),s, snt);
 					list.add(oOutput);
+					String oreOutput = u.createOutputOre(snt);
+					if(oreOutput.length() > 0)
+						globalRDFTriples.add(oreOutput);
 					numTrip += snt.getTriples().size();
 					numNes += snt.getNes().size();
 					numRdfTrip += snt.getRdf().size();
@@ -133,6 +137,7 @@ public class OIE {
 						- TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(endTime)));
 		logger.info("ClausIE - "+timeElapsed);
 		u.writeDocumentTriples(new File(outputFolder+"/Global-"+oieToolName + ".tsv"), globalOutput);
+		u.writeDocumentTriples(new File(outputFolder+"/OnlyORE-"+oieToolName + ".tsv"), globalRDFTriples);
 		u.writeNelReport(new File(outputFolder+"report/" + oieToolName + "-Report.tsv"),lr, timeElapsed);
 		
 	}
