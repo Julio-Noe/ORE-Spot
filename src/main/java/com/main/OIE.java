@@ -147,7 +147,8 @@ public class OIE {
 	public List<RDFTriple> removeRepeated(List<RDFTriple> rdf) {
 		Set<RDFTriple> repeated = new HashSet<RDFTriple>();
 		for(int i = 0 ; i < rdf.size() ; i++) {
-			for(int j = i+1 ; j < rdf.size() ; i ++) {
+			for(int j = i+1 ; j < rdf.size() ; j++) {
+				
 				if(rdf.get(i).repeated(rdf.get(j))){
 					repeated.add(rdf.get(j));
 				}
