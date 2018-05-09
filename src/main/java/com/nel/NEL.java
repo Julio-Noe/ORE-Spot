@@ -75,7 +75,8 @@ public class NEL {
 	        		obj = jrdr.readObject();
 	        }catch(Exception e) {
 	        		logger.error("Exception in sentence = " + paragraph);
-	        		return null;
+	        		listEntDesc.clear();
+	        		return listEntDesc;
 	        }
 	        int entityCounter = 0;
 	        List<String> listEntities = new ArrayList<String>();
